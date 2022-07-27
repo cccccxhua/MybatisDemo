@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="icon" href="https://static.nowcoder.com/images/logo_87_87.png"/>
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+  <link rel="stylesheet" th:href="@{/css/global.css}"/>
+  <title>首页</title>
+</head>
+<body>
+<div class="nk-container">
+  <div class="main">
+    <!-- 统计 -->
+    <div class="container pl-5 pr-5 pt-3 pb-3 mt-3">
+      <h6 class="mt-3"><b class="square"></b> 统计结果 </h6>
+      <button type="submit" onclick="back();">返回</button>
+      <ul class="list-unstyled" style="align-content: center">
+        <li class="media pb-3 pt-3 mb-3 border-bottom" th:each="user:${usersList}">
+          <label >id:</label>
+          <span th:text="${user.id}">张三</span>
+          &nbsp;&nbsp;&nbsp;
+          <label >username:</label>
+          <span th:text="${user.username}">123</span>
+          &nbsp;&nbsp;&nbsp;
+          <label >等级:</label>
+          <span th:text="${user.score}">123</span>
+          &nbsp;&nbsp;&nbsp;
+          <label ></label>
+          <a th:href="@{|/user/delete/${user.id}|}">
+            <button type="submit">删除</button>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+<div th:fragment="common-js">
+  <script th:src="@{/js/jquery-3.1.0.min.js}"></script>
+  <script th:src="@{/js/popper.min.js}"></script>
+  <script th:src="@{/js/bootstrap.min.js}"></script>
+</div>
+<script th:src="@{/js/global.js}"></script>
+<script th:src="@{/js/index.js}"></script>
+    <script>
+      function back(){
+        location.href = "/index";
+      }
+    </script>
+</body>
+</html>
