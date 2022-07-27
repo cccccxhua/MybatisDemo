@@ -6,11 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
-/**
- * @author CXH
- * @description
- * @create 2022-07-25 14:02
- */
+
 @Mapper
 public interface UserMapper {
     public abstract User selectById(int id);//通过id查询用户

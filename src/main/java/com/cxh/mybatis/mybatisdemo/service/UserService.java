@@ -10,11 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
 import java.util.List;
-/**
- * @author CXH
- * @description
- * @create 2022-07-25 14:04
- */
+
 @Service
 public class UserService {
 

@@ -9,13 +9,9 @@ import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Objects;
 
-/**
- * @author CXH
- * @description
- * @create 2022-07-25 16:57
- */
+
+
 @MappedTypes(UserScore.class)
 @MappedJdbcTypes(JdbcType.INTEGER)
 public class UserScoreTypeHandler extends BaseTypeHandler<UserScore> {

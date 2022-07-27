@@ -17,11 +17,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author CXH
- * @description
- * @create 2022-07-25 14:05
- */
 @Controller
 @RequestMapping(value = "/user")
 public class UserController {

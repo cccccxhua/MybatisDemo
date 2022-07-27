@@ -6,11 +6,7 @@ import org.omg.CORBA.UNKNOWN;
 
 import javax.xml.bind.annotation.XmlEnumValue;
 
-/**
- * @author CXH
- * @description
- * @create 2022-07-25 16:58
- */
+
 public enum UserScore{
     A(0,"prefect"),
     B(1,"excellent"),

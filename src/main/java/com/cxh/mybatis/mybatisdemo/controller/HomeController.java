@@ -8,11 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import java.util.List;
 
-/**
- * @author CXH
- * @description
- * @create 2022-07-25 15:19
- */
 @Controller
 public class HomeController {
 
