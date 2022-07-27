@@ -15,9 +15,8 @@ public interface UserMapper {
     public abstract int insertUser(User user);//添加用户
     public abstract int updatePassword(int id,String password);//修改用户密码
     public abstract int updateStatus(int id,int status);//删除用户
-    public abstract List<User> selectUsersList(String username, UserScore score);//统计等级
-
+    public abstract List<User> selectUsersList(UserScore score);//统计等级
     // 批量添加用户数据
-   // public abstract int addUsers(List<User> users);
-    public abstract int addUsers(User user);
+    public abstract int addUsers(List<User> users);
+//    public abstract int addUsers(User user);
 }

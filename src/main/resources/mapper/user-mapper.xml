@@ -20,6 +20,14 @@
         (`username`, `password`,`score`)
     </sql>
 
+    <resultMap id="userMap" type="com.cxh.mybatis.mybatisdemo.entity.User">
+        <result property="id" column="id"></result>
+        <result property="username" column="username"></result>
+        <result property="password" column="password"></result>
+        <result property="status" column="status"></result>
+        <result property="score" column="score" typeHandler="com.cxh.mybatis.mybatisdemo.enums.UserScoreTypeHandler"></result>
+    </resultMap>
+
     <select id="selectById" resultType="com.cxh.mybatis.mybatisdemo.entity.User">
         select <include refid="selectField"></include>
         from user
@@ -43,7 +51,6 @@
         from user
         where score=#{score,javaType=com.cxh.mybatis.mybatisdemo.enums.UserScore,jdbcType=INTEGER,typeHandler=com.cxh.mybatis.mybatisdemo.enums.UserScoreTypeHandler}
         and status=0
-        and username like #{username}
     </select>
 
     <insert id="insertUser" parameterType="com.cxh.mybatis.mybatisdemo.entity.User" keyProperty="id">
@@ -63,21 +70,15 @@
         where id=#{id}
     </update>
 
-    <resultMap id="userMap" type="com.cxh.mybatis.mybatisdemo.entity.User">
-        <result property="id" column="id"></result>
-        <result property="username" column="username"></result>
-        <result property="password" column="password"></result>
-        <result property="status" column="status"></result>
-        <result property="score" column="score" typeHandler="com.cxh.mybatis.mybatisdemo.enums.UserScoreTypeHandler"></result>
-    </resultMap>
-
     <insert id="addUsers" parameterType="com.cxh.mybatis.mybatisdemo.entity.User">
+
         insert into user <include refid="insertField"></include>
-            <!--<foreach collection="users" item="user" open="(" separator="," close=")">-->
-            values (#{username},
-                    #{password},
-                    #{score,javaType=com.cxh.mybatis.mybatisdemo.enums.UserScore,jdbcType=INTEGER,typeHandler=com.cxh.mybatis.mybatisdemo.enums.UserScoreTypeHandler})
-        <!--</foreach>-->
+        values
+        <foreach collection="users" item="user" index="index" separator=",">
+         (  #{user.username},
+            #{user.password},
+            #{user.score,javaType=com.cxh.mybatis.mybatisdemo.enums.UserScore,jdbcType=INTEGER,typeHandler=com.cxh.mybatis.mybatisdemo.enums.UserScoreTypeHandler})
+        </foreach>
 
 </insert>
 

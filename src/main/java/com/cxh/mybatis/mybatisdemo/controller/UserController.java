@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.cxh.mybatis.mybatisdemo.entity.User;
 import com.cxh.mybatis.mybatisdemo.enums.UserScore;
 import com.cxh.mybatis.mybatisdemo.service.UserService;
+import com.cxh.mybatis.mybatisdemo.utils.ImportExcelUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.tools.DiagnosticListener;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -31,10 +33,13 @@ public class UserController {
     }
 
     @PostMapping(value = "/data")
-    public String getUsersList(@RequestParam("start") String username, @RequestParam("end") UserScore score, Model model){
-        username = "%" + username + "%" ;
-        List<User> usersList = userService.findUsersList(username, score);
-        model.addAttribute("usersList", usersList);
+    public String getUsersList(Model model){
+        List<User> usersA = userService.findUsersList(UserScore.A);
+        List<User> usersB = userService.findUsersList(UserScore.B);
+        List<User> usersC = userService.findUsersList(UserScore.C);
+        model.addAttribute("countA", usersA==null?0:usersA.size());
+        model.addAttribute("countB", usersB==null?0:usersB.size());
+        model.addAttribute("countC", usersC==null?0:usersC.size());
         return "/data";
     }
 
@@ -45,7 +50,7 @@ public class UserController {
     }
 
     @PostMapping("/userList")
-    public String piLiang( MultipartFile excelFile) throws IOException {
+    public String piLiang( MultipartFile excelFile) throws Exception {
         String str="";
         Map<String,String> map = new HashMap<>();
         if (excelFile.isEmpty()){
@@ -54,9 +59,13 @@ public class UserController {
         }else {
             String fileName = excelFile.getOriginalFilename();
             InputStream is = excelFile.getInputStream();
+            userService.addUsers(fileName,is);
             return "redirect:/index";
+
         }
+
     }
+
 
 
     private String getJsonString(int code, String msg){

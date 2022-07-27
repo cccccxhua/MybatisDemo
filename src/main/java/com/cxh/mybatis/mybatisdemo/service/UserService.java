@@ -42,24 +42,20 @@ public class UserService {
         return userMapper.updateStatus(id,Status);
     }
 
-    public List<User> findUsersList(String username, UserScore score){
-
-        return userMapper.selectUsersList(username,score);
+    public List<User> findUsersList(UserScore score){
+        return userMapper.selectUsersList(score);
     }
 
     public int addUsers(String fileName, InputStream is) {
         try {
             List<User> userList = ImportExcelUtils.upload(fileName, is);
-            int count=0;
-            for (int i=0;i<userList.size();i++){
-                userMapper.addUsers(userList.get(i));
-                count++;
-            }
-            return count;
+            return userMapper.addUsers(userList);
+
         } catch (Exception e) {
             e.printStackTrace();
-            return 0;
         }
+        return 0;
     }
+
 
 }
